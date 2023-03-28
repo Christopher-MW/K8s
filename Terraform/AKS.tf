@@ -88,3 +88,9 @@ resource "azurerm_role_assignment" "cmwServiceRole" {
   scope                = azurerm_resource_group.cmwK8SRG.id
   role_definition_name = "Contributor"
 }
+
+resource "azurerm_role_assignment" "cmwServiceNodeRole" {
+  principal_id         = "404b63c0-9996-4cc5-8f46-5c36d894495d"
+  scope                = data.azurerm_resource_group.cmwNodeRG.id
+  role_definition_name = "Contributor"
+}
