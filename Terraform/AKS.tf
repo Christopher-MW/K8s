@@ -11,7 +11,7 @@ resource "azurerm_kubernetes_cluster" "cmwk8sCluster" {
     admin_username = "ubuntu"
 
     ssh_key {
-      key_data = file("${var.Ssh_PublicKey}")
+      key_data = var.Ssh_PublicKey
     }
   }
 
@@ -80,4 +80,11 @@ resource "azurerm_role_assignment" "cmwACR_pull" {
   depends_on = [
     azurerm_kubernetes_cluster.cmwk8sCluster
   ]
+}
+
+
+resource "azurerm_role_assignment" "cmwServiceRole" {
+  principal_id         = "404b63c0-9996-4cc5-8f46-5c36d894495d"
+  scope                = azurerm_resource_group.cmwK8SRG.id
+  role_definition_name = "Contributor"
 }
